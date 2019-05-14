@@ -1,0 +1,573 @@
+
+data string after padding: Hello!~~
+
+converting key to binary: 
+0110110101100101011001110110000101100010011101010110001101101011
+
+data block <ascii code of 64 bits per row>:
+0100100001100101011011000110110001101111001000010111111001111110
+
+Rows : 1
+
+.......... Starting = 1th iteration ................
+
+Key 1 : 111000001011111011100110101000001010100100010010
+--  Apply transpose E[] to Ri-1 -----------------
+Expanded: 
+000000000001011111111101011011111011111010100000
+
+--  Apply XOR to ki and Ei -------------
+XORed: 111000001010100100011011110011110001011110110010
+--  Apply transpose PI_2[] to New -----------------
+PI_2: 01001100001010000101011101011011
+--  Apply transpose P[] to New -----------------
+
+--  Apply XOR to Li-1 and New = Ri -----------------
+
+
+ Li :00000000111111101101110111010000
+
+ Ri :11110101111111100111011001101110
+.......... Starting = 2th iteration ................
+
+Key 2 : 111000001011111011100110101000001010100100010010
+--  Apply transpose E[] to Ri-1 -----------------
+Expanded: 
+011110101011111111111100001110101100001101011101
+
+--  Apply XOR to ki and Ei -------------
+XORed: 100110100000000100011010100110100110101001001111
+--  Apply transpose PI_2[] to New -----------------
+PI_2: 10100001000010000011011110100101
+--  Apply transpose P[] to New -----------------
+
+--  Apply XOR to Li-1 and New = Ri -----------------
+
+
+ Li :11110101111111100111011001101110
+
+ Ri :00100000010111101011001100111001
+.......... Starting = 3th iteration ................
+
+Key 3 : 111000001011011001110110100101110000000100011001
+--  Apply transpose E[] to Ri-1 -----------------
+Expanded: 
+100100000000001011111101010110100110100111110010
+
+--  Apply XOR to ki and Ei -------------
+XORed: 011100001011010010001011110011010110100011101011
+--  Apply transpose PI_2[] to New -----------------
+PI_2: 10001011001010001101010001111110
+--  Apply transpose P[] to New -----------------
+
+--  Apply XOR to Li-1 and New = Ri -----------------
+
+
+ Li :00100000010111101011001100111001
+
+ Ri :10011110011000000011001000000010
+.......... Starting = 4th iteration ................
+
+Key 4 : 111000001011011001110110100101110000000100011001
+--  Apply transpose E[] to Ri-1 -----------------
+Expanded: 
+010011111100001100000000000110100100000000000101
+
+--  Apply XOR to ki and Ei -------------
+XORed: 101011110111010101110110100011010100000100011100
+--  Apply transpose PI_2[] to New -----------------
+PI_2: 00110111010011111111001001100001
+--  Apply transpose P[] to New -----------------
+
+--  Apply XOR to Li-1 and New = Ri -----------------
+
+
+ Li :10011110011000000011001000000010
+
+ Ri :11000001001010111110110111101011
+.......... Starting = 5th iteration ................
+
+Key 5 : 111000001011011001110110100101110000000100011001
+--  Apply transpose E[] to Ri-1 -----------------
+Expanded: 
+111000000010100101010111111101011011111101010111
+
+--  Apply XOR to ki and Ei -------------
+XORed: 000000001001111100100001011000101011111001001110
+--  Apply transpose PI_2[] to New -----------------
+PI_2: 11100011111100001000101100011100
+--  Apply transpose P[] to New -----------------
+
+--  Apply XOR to Li-1 and New = Ri -----------------
+
+
+ Li :11000001001010111110110111101011
+
+ Ri :11000001110000011101000100100110
+.......... Starting = 6th iteration ................
+
+Key 6 : 111000001011011001110110100101110000000100011001
+--  Apply transpose E[] to Ri-1 -----------------
+Expanded: 
+011000000011111000000011111010100010100100001101
+
+--  Apply XOR to ki and Ei -------------
+XORed: 100000001000100001110101011111010010100000010100
+--  Apply transpose PI_2[] to New -----------------
+PI_2: 10100000011000100000100011011101
+--  Apply transpose P[] to New -----------------
+
+--  Apply XOR to Li-1 and New = Ri -----------------
+
+
+ Li :11000001110000011101000100100110
+
+ Ri :11011011111110101110011111001110
+.......... Starting = 7th iteration ................
+
+Key 7 : 111000001011011001110110100101110000000100011001
+--  Apply transpose E[] to Ri-1 -----------------
+Expanded: 
+011011110111111111110101011100001111111001011101
+
+--  Apply XOR to ki and Ei -------------
+XORed: 100011111100100110000011111001111111111101000100
+--  Apply transpose PI_2[] to New -----------------
+PI_2: 11110100101011010011101101111101
+--  Apply transpose P[] to New -----------------
+
+--  Apply XOR to Li-1 and New = Ri -----------------
+
+
+ Li :11011011111110101110011111001110
+
+ Ri :01111011011100010110111011010000
+.......... Starting = 8th iteration ................
+
+Key 8 : 111000001011011001110110100101110000000100011001
+--  Apply transpose E[] to Ri-1 -----------------
+Expanded: 
+001111110110101110100010101101011101011010100000
+
+--  Apply XOR to ki and Ei -------------
+XORed: 110111111101110111010100001000101101011110111001
+--  Apply transpose PI_2[] to New -----------------
+PI_2: 01011111100001111010101100101011
+--  Apply transpose P[] to New -----------------
+
+--  Apply XOR to Li-1 and New = Ri -----------------
+
+
+ Li :01111011011100010110111011010000
+
+ Ri :00000010100100000001101001011100
+.......... Starting = 9th iteration ................
+
+Key 9 : 111000001011111011100110101000001010100100010010
+--  Apply transpose E[] to Ri-1 -----------------
+Expanded: 
+000000000101010010100000000011110100001011111000
+
+--  Apply XOR to ki and Ei -------------
+XORed: 111000001110101001000110101011111110101111101010
+--  Apply transpose PI_2[] to New -----------------
+PI_2: 10001101100110110101100101101111
+--  Apply transpose P[] to New -----------------
+
+--  Apply XOR to Li-1 and New = Ri -----------------
+
+
+ Li :00000010100100000001101001011100
+
+ Ri :11000111101011110000001110100000
+.......... Starting = 10th iteration ................
+
+Key 10 : 111000001011011001110110100101110000000100011001
+--  Apply transpose E[] to Ri-1 -----------------
+Expanded: 
+011000001111110101011110100000000111110100000001
+
+--  Apply XOR to ki and Ei -------------
+XORed: 100000000100101100101000000101110111110000011000
+--  Apply transpose PI_2[] to New -----------------
+PI_2: 11000001010100010000011111100101
+--  Apply transpose P[] to New -----------------
+
+--  Apply XOR to Li-1 and New = Ri -----------------
+
+
+ Li :11000111101011110000001110100000
+
+ Ri :10000110001000011111011001110101
+.......... Starting = 11th iteration ................
+
+Key 11 : 111000001011011001110110100101110000000100011001
+--  Apply transpose E[] to Ri-1 -----------------
+Expanded: 
+110000001100000100000011111110101100001110101011
+
+--  Apply XOR to ki and Ei -------------
+XORed: 001000000111011101110101011011011100001010110010
+--  Apply transpose PI_2[] to New -----------------
+PI_2: 00001010111100111100101001110000
+--  Apply transpose P[] to New -----------------
+
+--  Apply XOR to Li-1 and New = Ri -----------------
+
+
+ Li :10000110001000011111011001110101
+
+ Ri :00010000110100100000011010100100
+.......... Starting = 12th iteration ................
+
+Key 12 : 111000001011011001110110100101110000000100011001
+--  Apply transpose E[] to Ri-1 -----------------
+Expanded: 
+000010100001011010100100000000001101010100001000
+
+--  Apply XOR to ki and Ei -------------
+XORed: 111010101010000011010010100101111101010000010001
+--  Apply transpose PI_2[] to New -----------------
+PI_2: 01000000100010000111000111101011
+--  Apply transpose P[] to New -----------------
+
+--  Apply XOR to Li-1 and New = Ri -----------------
+
+
+ Li :00010000110100100000011010100100
+
+ Ri :10101110001101110101101110110100
+.......... Starting = 13th iteration ................
+
+Key 13 : 111000001011011001110110100101110000000100011001
+--  Apply transpose E[] to Ri-1 -----------------
+Expanded: 
+010101011100000110101110101011110111110110101001
+
+--  Apply XOR to ki and Ei -------------
+XORed: 101101010111011111011000001110000111110010110000
+--  Apply transpose PI_2[] to New -----------------
+PI_2: 11011010000101011100111010100101
+--  Apply transpose P[] to New -----------------
+
+--  Apply XOR to Li-1 and New = Ri -----------------
+
+
+ Li :10101110001101110101101110110100
+
+ Ri :11000101011111101001101010001111
+.......... Starting = 14th iteration ................
+
+Key 14 : 111000001011011001110110100101110000000100011001
+--  Apply transpose E[] to Ri-1 -----------------
+Expanded: 
+111000001010101111111101010011110101010001011111
+
+--  Apply XOR to ki and Ei -------------
+XORed: 000000000001110110001011110110000101010101000110
+--  Apply transpose PI_2[] to New -----------------
+PI_2: 01100110001010001001011010110000
+--  Apply transpose P[] to New -----------------
+
+--  Apply XOR to Li-1 and New = Ri -----------------
+
+
+ Li :11000101011111101001101010001111
+
+ Ri :11001101000101111101110111101001
+.......... Starting = 15th iteration ................
+
+Key 15 : 111000001011011001110110100101110000000100011001
+--  Apply transpose E[] to Ri-1 -----------------
+Expanded: 
+111001011010100010101111111011111011111101010011
+
+--  Apply XOR to ki and Ei -------------
+XORed: 000001010001111011011001011110001011111001001010
+--  Apply transpose PI_2[] to New -----------------
+PI_2: 11010011101101001000110010010100
+--  Apply transpose P[] to New -----------------
+
+--  Apply XOR to Li-1 and New = Ri -----------------
+
+
+ Li :11001101000101111101110111101001
+
+ Ri :10010010111111100100101110100000
+.......... Starting = 16th iteration ................
+
+Key 16 : 111000001011111011100110101000001010100100010010
+--  Apply transpose E[] to Ri-1 -----------------
+Expanded: 
+010010100101011111111100001001010111110100000001
+
+--  Apply XOR to ki and Ei -------------
+XORed: 101010101110100100011010100001011101010000010011
+--  Apply transpose PI_2[] to New -----------------
+PI_2: 01000000100010010111011001101001
+--  Apply transpose P[] to New -----------------
+
+--  Apply XOR to Li-1 and New = Ri -----------------
+
+
+ Li :10010010111111100100101110100000
+
+ Ri :01100101001000110101000000100001
+Ciphered binary data <after encryption>:
+0000110011111100001100000011110011110000001100110011110011110011
+
+text data ASCII :
+243 60 51 240 60 48 252 12 
+
+Ciphered text data <after encryption>:
+ó<3ð<0ü
+.................. Starting Decryption ....................
+
+.......... Starting = 1th iteration ................
+
+Key 1 : 111000001011111011100110101000001010100100010010
+-- Apply swap Li = Ri-1 -----------------
+
+--  Apply transpose E[] to Ri-1 -----------------
+
+--  Apply XOR to ki and Ei -------------
+
+--  Apply transpose PI_2[] to New -----------------
+
+--  Apply transpose P[] to New -----------------
+
+--  Apply XOR to Li-1 and New = Ri -----------------
+
+.......... Starting = 2th iteration ................
+
+Key 2 : 111000001011011001110110100101110000000100011001
+-- Apply swap Li = Ri-1 -----------------
+
+--  Apply transpose E[] to Ri-1 -----------------
+
+--  Apply XOR to ki and Ei -------------
+
+--  Apply transpose PI_2[] to New -----------------
+
+--  Apply transpose P[] to New -----------------
+
+--  Apply XOR to Li-1 and New = Ri -----------------
+
+.......... Starting = 3th iteration ................
+
+Key 3 : 111000001011011001110110100101110000000100011001
+-- Apply swap Li = Ri-1 -----------------
+
+--  Apply transpose E[] to Ri-1 -----------------
+
+--  Apply XOR to ki and Ei -------------
+
+--  Apply transpose PI_2[] to New -----------------
+
+--  Apply transpose P[] to New -----------------
+
+--  Apply XOR to Li-1 and New = Ri -----------------
+
+.......... Starting = 4th iteration ................
+
+Key 4 : 111000001011011001110110100101110000000100011001
+-- Apply swap Li = Ri-1 -----------------
+
+--  Apply transpose E[] to Ri-1 -----------------
+
+--  Apply XOR to ki and Ei -------------
+
+--  Apply transpose PI_2[] to New -----------------
+
+--  Apply transpose P[] to New -----------------
+
+--  Apply XOR to Li-1 and New = Ri -----------------
+
+.......... Starting = 5th iteration ................
+
+Key 5 : 111000001011011001110110100101110000000100011001
+-- Apply swap Li = Ri-1 -----------------
+
+--  Apply transpose E[] to Ri-1 -----------------
+
+--  Apply XOR to ki and Ei -------------
+
+--  Apply transpose PI_2[] to New -----------------
+
+--  Apply transpose P[] to New -----------------
+
+--  Apply XOR to Li-1 and New = Ri -----------------
+
+.......... Starting = 6th iteration ................
+
+Key 6 : 111000001011011001110110100101110000000100011001
+-- Apply swap Li = Ri-1 -----------------
+
+--  Apply transpose E[] to Ri-1 -----------------
+
+--  Apply XOR to ki and Ei -------------
+
+--  Apply transpose PI_2[] to New -----------------
+
+--  Apply transpose P[] to New -----------------
+
+--  Apply XOR to Li-1 and New = Ri -----------------
+
+.......... Starting = 7th iteration ................
+
+Key 7 : 111000001011011001110110100101110000000100011001
+-- Apply swap Li = Ri-1 -----------------
+
+--  Apply transpose E[] to Ri-1 -----------------
+
+--  Apply XOR to ki and Ei -------------
+
+--  Apply transpose PI_2[] to New -----------------
+
+--  Apply transpose P[] to New -----------------
+
+--  Apply XOR to Li-1 and New = Ri -----------------
+
+.......... Starting = 8th iteration ................
+
+Key 8 : 111000001011111011100110101000001010100100010010
+-- Apply swap Li = Ri-1 -----------------
+
+--  Apply transpose E[] to Ri-1 -----------------
+
+--  Apply XOR to ki and Ei -------------
+
+--  Apply transpose PI_2[] to New -----------------
+
+--  Apply transpose P[] to New -----------------
+
+--  Apply XOR to Li-1 and New = Ri -----------------
+
+.......... Starting = 9th iteration ................
+
+Key 9 : 111000001011011001110110100101110000000100011001
+-- Apply swap Li = Ri-1 -----------------
+
+--  Apply transpose E[] to Ri-1 -----------------
+
+--  Apply XOR to ki and Ei -------------
+
+--  Apply transpose PI_2[] to New -----------------
+
+--  Apply transpose P[] to New -----------------
+
+--  Apply XOR to Li-1 and New = Ri -----------------
+
+.......... Starting = 10th iteration ................
+
+Key 10 : 111000001011011001110110100101110000000100011001
+-- Apply swap Li = Ri-1 -----------------
+
+--  Apply transpose E[] to Ri-1 -----------------
+
+--  Apply XOR to ki and Ei -------------
+
+--  Apply transpose PI_2[] to New -----------------
+
+--  Apply transpose P[] to New -----------------
+
+--  Apply XOR to Li-1 and New = Ri -----------------
+
+.......... Starting = 11th iteration ................
+
+Key 11 : 111000001011011001110110100101110000000100011001
+-- Apply swap Li = Ri-1 -----------------
+
+--  Apply transpose E[] to Ri-1 -----------------
+
+--  Apply XOR to ki and Ei -------------
+
+--  Apply transpose PI_2[] to New -----------------
+
+--  Apply transpose P[] to New -----------------
+
+--  Apply XOR to Li-1 and New = Ri -----------------
+
+.......... Starting = 12th iteration ................
+
+Key 12 : 111000001011011001110110100101110000000100011001
+-- Apply swap Li = Ri-1 -----------------
+
+--  Apply transpose E[] to Ri-1 -----------------
+
+--  Apply XOR to ki and Ei -------------
+
+--  Apply transpose PI_2[] to New -----------------
+
+--  Apply transpose P[] to New -----------------
+
+--  Apply XOR to Li-1 and New = Ri -----------------
+
+.......... Starting = 13th iteration ................
+
+Key 13 : 111000001011011001110110100101110000000100011001
+-- Apply swap Li = Ri-1 -----------------
+
+--  Apply transpose E[] to Ri-1 -----------------
+
+--  Apply XOR to ki and Ei -------------
+
+--  Apply transpose PI_2[] to New -----------------
+
+--  Apply transpose P[] to New -----------------
+
+--  Apply XOR to Li-1 and New = Ri -----------------
+
+.......... Starting = 14th iteration ................
+
+Key 14 : 111000001011011001110110100101110000000100011001
+-- Apply swap Li = Ri-1 -----------------
+
+--  Apply transpose E[] to Ri-1 -----------------
+
+--  Apply XOR to ki and Ei -------------
+
+--  Apply transpose PI_2[] to New -----------------
+
+--  Apply transpose P[] to New -----------------
+
+--  Apply XOR to Li-1 and New = Ri -----------------
+
+.......... Starting = 15th iteration ................
+
+Key 15 : 111000001011111011100110101000001010100100010010
+-- Apply swap Li = Ri-1 -----------------
+
+--  Apply transpose E[] to Ri-1 -----------------
+
+--  Apply XOR to ki and Ei -------------
+
+--  Apply transpose PI_2[] to New -----------------
+
+--  Apply transpose P[] to New -----------------
+
+--  Apply XOR to Li-1 and New = Ri -----------------
+
+.......... Starting = 16th iteration ................
+
+Key 16 : 111000001011111011100110101000001010100100010010
+-- Apply swap Li = Ri-1 -----------------
+
+--  Apply transpose E[] to Ri-1 -----------------
+
+--  Apply XOR to ki and Ei -------------
+
+--  Apply transpose PI_2[] to New -----------------
+
+--  Apply transpose P[] to New -----------------
+
+--  Apply XOR to Li-1 and New = Ri -----------------
+
+Deciphered binary data <after decryption>:
+0000110011111100001100000011110011110000001100110011110011110011
+
+text data ASCII :
+243 60 51 240 60 48 252 12 
+
+deCiphered text data <after decryption>:
+ó<3ð<0ü
