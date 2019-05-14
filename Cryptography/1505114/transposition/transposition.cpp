@@ -184,24 +184,40 @@ int main() {
 	
 	int k=0;
 	vector<char> colMatrix[col], tmpMatrix[col];
-	for(int i = 0 ; i< col ; i++){
-		for (int j = 0; j < col_len; j++)
-		{
+	for (int j = 0; j < col_len; j++)
+	{
+		for(int i = 0 ; i< col ; i++){
 			colMatrix[i].push_back(plaintext[k]);
-			outfile<<plaintext[k];
 			k++;
 			if( k >= plaintext.length())
 				break;
 		}
-		outfile<<endl;
+		if( k >= plaintext.length())
+			break;
 	}
+	for (int i = 0; i < col; i++)
+	{
+		for (int j = 0; j < colMatrix[i].size(); j++)
+			cout<<colMatrix[i][j];
+		cout<<endl;
+	}
+	
 	for (int j = 0; j < key.size(); j++)
 	{
 		tmpMatrix[key[j]] = colMatrix[j];
 	}
-	outfile<<"\n\nEncrypted again : \n";
-	cout<<"\n\nEncrypted again : \n";
-	string new_str = vec_to_str(tmpMatrix , col);
+	cout<<"\n------------------------------------\n";
+	string new_str;
+	for (int i = 0; i < col; i++)
+	{
+		for (int j = 0; j < tmpMatrix[i].size(); j++){
+			cout<<tmpMatrix[i][j];
+			new_str += tmpMatrix[i][j];
+		}
+		cout<<endl;
+	}
+	outfile<<"\nEncrypted again : \n";
+	cout<<"\nEncrypted again : \n";
 	outfile<<new_str<<endl;
 	cout<<new_str<<endl;
 	int count  = 0;
@@ -211,8 +227,7 @@ int main() {
 			count++;
 	}
 	double acc = (new_str.length()-count);
-	cout<<count<<endl;
-	cout<<"Accuracy :"<<(acc/new_str.length()) * 100<<endl;
+	cout<<"Accuracy :"<<(acc/new_str.length()) * 100<<"\%"<<endl;
 
 	return 0;
 }
