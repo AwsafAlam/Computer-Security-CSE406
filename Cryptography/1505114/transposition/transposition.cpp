@@ -79,9 +79,9 @@ vi findColNumber(int cipher_len){
 
 int main() {
 	
-	string plaintext,key, ciphertext;
-	vi col_Combinations;
-	int noOfhints;
+	string plaintext, ciphertext;
+	vi col_Combinations, key;
+	int noOfhints , key_len, col, col_len;
 	vs hintList;
 
     infile.open("in.txt");
@@ -109,8 +109,8 @@ int main() {
 	bool flag = true;
 	for (int lt = 0; lt < col_Combinations.size(); lt++)
 	{
-		int col = col_Combinations[lt];
-		int col_len = ciphertext.size() / col;
+		col = col_Combinations[lt];
+		col_len = ciphertext.size() / col;
 		allComb.clear();
 		vector<char> colMatrix[col];
 
@@ -155,18 +155,64 @@ int main() {
 			if(match_score == hintList.size()){
 				plaintext = new_str;
 				flag = false;
+				key = allComb[i];
+				key_len = allComb[i].size();
 				break;
 			}
 		}
-		cout<<"Total NO of Combinations: "<<noOfcomb<<endl;
-		cout<<"NO of Combinations Explored: "<<i<<endl;	
-		if(!flag)	
+
+		if(!flag){
+			cout<<"Key Length :"<<key_len<<endl;
+			cout<<"Key combination : ";
+			for (int j = 0; j < key.size(); j++)
+				cout<<key[j]<<" ";
+			
+			cout<<"\nTotal NO of Combinations: "<<noOfcomb<<endl;
+			cout<<"NO of Combinations Explored: "<<i<<endl;	
 			break;
+		}
+			
 	}
 	
-	
+	transform(plaintext.begin(), plaintext.end(),plaintext.begin(), ::tolower);
 	cout<<"\nDecrypted txt: "<<plaintext<<endl;
 	outfile<<"\nDecrypted txt: "<<plaintext<<endl;
+
+	// Re encrypting --- 
+	transform(plaintext.begin(), plaintext.end(),plaintext.begin(), ::toupper);
+	outfile<<"\nDividing cipher into columns ---------\n\n";
+	
+	int k=0;
+	vector<char> colMatrix[col], tmpMatrix[col];
+	for(int i = 0 ; i< col ; i++){
+		for (int j = 0; j < col_len; j++)
+		{
+			colMatrix[i].push_back(plaintext[k]);
+			outfile<<plaintext[k];
+			k++;
+			if( k >= plaintext.length())
+				break;
+		}
+		outfile<<endl;
+	}
+	for (int j = 0; j < key.size(); j++)
+	{
+		tmpMatrix[key[j]] = colMatrix[j];
+	}
+	outfile<<"\n\nEncrypted again : \n";
+	cout<<"\n\nEncrypted again : \n";
+	string new_str = vec_to_str(tmpMatrix , col);
+	outfile<<new_str<<endl;
+	cout<<new_str<<endl;
+	int count  = 0;
+	for (int i = 0; i < new_str.length(); i++)
+	{
+		if(new_str[i] != ciphertext[i])
+			count++;
+	}
+	double acc = (new_str.length()-count);
+	cout<<count<<endl;
+	cout<<"Accuracy :"<<(acc/new_str.length()) * 100<<endl;
 
 	return 0;
 }
