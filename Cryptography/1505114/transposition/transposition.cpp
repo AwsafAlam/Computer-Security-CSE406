@@ -163,12 +163,19 @@ int main() {
 
 		if(!flag){
 			cout<<"Key Length :"<<key_len<<endl;
+			outfile<<"Key Length :"<<key_len<<endl;
 			cout<<"Key combination : ";
+			outfile<<"Key combination : ";
 			for (int j = 0; j < key.size(); j++)
 				cout<<key[j]<<" ";
+			for (int j = 0; j < key.size(); j++)
+				outfile<<key[j]<<" ";
+			
 			
 			cout<<"\nTotal NO of Combinations: "<<noOfcomb<<endl;
+			outfile<<"\nTotal NO of Combinations: "<<noOfcomb<<endl;
 			cout<<"NO of Combinations Explored: "<<i<<endl;	
+			outfile<<"NO of Combinations Explored: "<<i<<endl;	
 			break;
 		}
 			
@@ -180,7 +187,7 @@ int main() {
 
 	// Re encrypting --- 
 	transform(plaintext.begin(), plaintext.end(),plaintext.begin(), ::toupper);
-	outfile<<"\nDividing cipher into columns ---------\n\n";
+	outfile<<"\nDividing plain txt into columns ---------\n\n";
 	
 	int k=0;
 	vector<char> colMatrix[col], tmpMatrix[col];
@@ -212,8 +219,10 @@ int main() {
 	{
 		for (int j = 0; j < tmpMatrix[i].size(); j++){
 			cout<<tmpMatrix[i][j];
+			outfile<<tmpMatrix[i][j];
 			new_str += tmpMatrix[i][j];
 		}
+		outfile<<endl;
 		cout<<endl;
 	}
 	outfile<<"\nEncrypted again : \n";
@@ -227,6 +236,7 @@ int main() {
 			count++;
 	}
 	double acc = (new_str.length()-count);
+	outfile<<"Accuracy :"<<(acc/new_str.length()) * 100<<"\%"<<endl;
 	cout<<"Accuracy :"<<(acc/new_str.length()) * 100<<"\%"<<endl;
 
 	return 0;
