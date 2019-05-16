@@ -276,7 +276,7 @@ cout<<original<<endl;
       else
         newR[j] = '0';
     }
-    cout<<"XOR oldR and new :"<<newR<<endl;
+    cout<<"\nXOR oldR and new :"<<newR<<endl;
 
     //---------------------------------------------------------------
 
