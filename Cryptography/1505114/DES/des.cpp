@@ -45,11 +45,12 @@ void char_to_binary(int n, int k,int l)
 
 string binary_to_char(vi b_str[], int row) 
 {
-    outfile<<"\ntext data ASCII :\n";
+    //outfile<<"\ntext data ASCII :\n";
 
-    string ciph;
+    string full_txt = "";
     for (int i = 0; i < row; i++)
     {
+        string ciph = "";
         int k=0, base = 1, sum = 0;
         for (int j = b_str[i].size()-1; j >=0 ; j--)
         {
@@ -57,16 +58,18 @@ string binary_to_char(vi b_str[], int row)
             base *= 2;
             k++;
             if(k%8 ==0){
-                outfile<<sum<<" ";
+                //outfile<<sum<<" ";
                 char a = sum;
                 ciph.push_back(a);
                 sum=0;
                 base = 1;
             }
         }
+        reverse(ciph.begin(), ciph.end()); 
+        full_txt += ciph;
     }
-    outfile<<endl;
-    return ciph;    
+    // outfile<<endl;
+    return full_txt;    
 } 
 
 vi applyTransposition(vi b_str, int T[], int size){
@@ -123,10 +126,10 @@ vi XOR(vi a, vi b){
     return tmp;
 }
 
-vi encryption(int row ,bool flag){
+vi encryption(bool flag , vi b_str){
     
     /// Apply transpose PI[] to data ------------
-    vi new_data = applyTransposition(data_frame[row] , PI , 64);
+    vi new_data = applyTransposition(b_str , PI , 64);
     vi Li;
     vi Ri;
     for (int i = 0; i < 32; i++){
@@ -141,9 +144,9 @@ vi encryption(int row ,bool flag){
         outfile<<i+1<<"th iteration ................\n";
         vi new_key;
         if(flag)
-            new_key = decrypt_key[i];
+            new_key = decrypt_key[i];//Encryption
         else
-            new_key = decrypt_key[15-i];
+            new_key = decrypt_key[15-i]; //Decryption
         
         vi temp = Li;
         Li = Ri;
@@ -162,26 +165,22 @@ vi encryption(int row ,bool flag){
             outfile<<xor_ed[i];
 
         outfile<<"\nPI_2: ";
-        expanded.clear();
-        expanded = applyTransposition(xor_ed , PI_2 , 32);
-        for (int i = 0; i < expanded.size(); i++)
-            outfile<<expanded[i];
+        vi pi2 = applyTransposition(xor_ed , PI_2 , 32);
+        for (int i = 0; i < pi2.size(); i++)
+            outfile<<pi2[i];
 
         outfile<<"\nP_BOX : ";
-        xor_ed.clear();
-        xor_ed = applyTransposition(expanded,P,32);
-        for (int i = 0; i < xor_ed.size(); i++)
-            outfile<<xor_ed[i];
+        vi Pbox = applyTransposition(pi2,P,32);
+        for (int i = 0; i < Pbox.size(); i++)
+            outfile<<Pbox[i];
 
         outfile<<"\nXOR oldR and new: ";
         
-        expanded.clear();
-        expanded = XOR(xor_ed , temp);
-        for (int i = 0; i < expanded.size(); i++)
-            outfile<<expanded[i];
-
         Ri.clear();
-        Ri = expanded;
+        Ri = XOR(Pbox , temp);
+        for (int i = 0; i < Ri.size(); i++)
+            outfile<<Ri[i];
+
         // ============================================
         outfile<<"\n\nLi :";
         for (int i = 0; i < Li.size(); i++)
@@ -203,14 +202,14 @@ vi encryption(int row ,bool flag){
     for (int i = 0; i < 64; i++)
     {
         if(i<32)
-            new_data.push_back(Li[i]);
+            new_data.push_back(Ri[i]);
         else
-            new_data.push_back(Ri[i-32]);
+            new_data.push_back(Li[i-32]);
     }
-    Li.clear();
-    Li = applyTransposition(new_data , PI_1 , 64);
+    
+    return applyTransposition(new_data , PI_1 , 64);
         
-    return Li;
+    // return Li;
 }
 
 
@@ -222,8 +221,8 @@ void generate_key(vi key){
     {
         //outfile<<"\n--  circular Left shift key ------"<<endl;
         vi temp = leftCircularRotate(new_key,i);
-        // new_key.clear();
-        // new_key = temp;
+        new_key.clear();
+        new_key = temp;
         
         // outfile<<"\n--  Apply transpose CP_2[] to key -----------------"<<endl;
         vi transposed = applyTransposition(temp,CP_2,48);
@@ -253,7 +252,7 @@ int main(int argc, char const *argv[])
     
     /// Padding data string ----------
     while(plaintext.length() %char_sz != 0 ){
-        plaintext += "~";
+        plaintext += " ";
     }
     outfile<<"\ndata string after padding: "<<plaintext<<endl;
 
@@ -295,7 +294,7 @@ int main(int argc, char const *argv[])
     
     for (int i = 0; i < row_no; i++)
     {
-        ciphered[i] = encryption(i , true);
+        ciphered[i] = encryption(true , data_frame[i]);
     }
     
     /// Printing data block -----------
@@ -316,7 +315,7 @@ int main(int argc, char const *argv[])
     outfile<<".................. Starting Decryption ....................\n";
     for (int i = 0; i < row_no; i++)
     {
-        decrypted[i] = encryption(i , false);
+        decrypted[i] = encryption(false , ciphered[i]);
     }
 
     /// Printing data block -----------

@@ -1,2 +1,2 @@
 megabuck
-Hello!
+Hello world
