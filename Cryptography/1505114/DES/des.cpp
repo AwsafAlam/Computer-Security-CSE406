@@ -310,7 +310,8 @@ int main(int argc, char const *argv[])
     /// Binary to char -----------
     string cipheredtxt = binary_to_char(ciphered, row_no);
     outfile<<"\nCiphered text data <after encryption>:\n"<<cipheredtxt<<endl;
-
+    cout<<"\nCiphered text data <after encryption>:\n" <<cipheredtxt<<endl;
+    
     /// Decryption ----
     outfile<<".................. Starting Decryption ....................\n";
     for (int i = 0; i < row_no; i++)
@@ -331,6 +332,7 @@ int main(int argc, char const *argv[])
     /// Binary to char -----------
     string decipheredtxt = binary_to_char(decrypted, row_no);
     outfile<<"\ndeCiphered text data <after decryption>:\n"<<decipheredtxt<<endl;
+    cout<<"\ndeCiphered text data <after decryption>:\n"<<decipheredtxt<<endl;
 
     // close the opened file.
     outfile.close();
