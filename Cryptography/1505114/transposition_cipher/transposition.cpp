@@ -1,4 +1,4 @@
-#include <bits/stdc++.h>
+#include <bits/stdc++.h> 
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
@@ -14,33 +14,7 @@ ofstream outfile;
 ifstream infile;
 
 vector<vi> allComb;
-int noOfcomb;
-
-vi swap( vi a, int i, int j ) // swap elements a[i], a[j]
-{
-    int temp = a[i] ;
-    a[i] = a[j] ;
-    a[j] = temp ;
-	return a;
-}
-
-// array 'a' of size 'n', permute range starting at position 'from'
-void permute( vi a, int n, int from = 0 )
-{
-    // if the entire range has been permuted, print the permutation
-    if( from == n ){
-		allComb.push_back(a);
-		noOfcomb++;
-	} 
-
-    // else
-    for( int i = from ; i < n ; ++i ) // repeat: for each element in the range to permute
-    {
-        a = swap( a, from, i ) ; // make this element the head (at position from)
-        permute( a, n, from+1 ) ; // form all permutations of the tail (starting at from+1)
-        a = swap( a, from, i ) ; // restore the original positions
-    }
-}
+int noOfcomb = 0;
 
 string vec_to_str(vector<char> mat[], int col){
 	string tmp;
@@ -66,14 +40,14 @@ int findMatch(string cipher , vs hints){
 
 vi findColNumber(int cipher_len){
 	vi col;
-	cout<<"col: ";
+	outfile<<"col: ";
 	for(int i = 2 ; i < cipher_len; i++){
 		if(cipher_len % i == 0){
 			col.push_back(i);
-			cout<<i<<" ";
+			outfile<<i<<" ";
 		}
 	}
-	cout<<endl;
+	outfile<<endl;
 	return col;	
 }
 
@@ -84,28 +58,50 @@ int main() {
 	int noOfhints , key_len, col, col_len;
 	vs hintList;
 
-    infile.open("in.txt");
-    outfile.open("out.txt");
+	infile.open("transposition-114.txt");
+    outfile.open("output.txt");
 
 	infile>>ciphertext;	
 	cout<<"Encrypted : "<<ciphertext<<endl;
-	cout<<ciphertext.size()<<endl;
+	cout<<"Length : "<<ciphertext.size()<<endl;
 
-	infile>>noOfhints;
-	for (int i = 0; i < noOfhints; i++)
+	string secondLine;
+	infile>>secondLine;
+	secondLine.pop_back();
+	cout<<secondLine<<endl; 
+	transform(secondLine.begin(), secondLine.end(),secondLine.begin(), ::toupper);
+	hintList.push_back(secondLine);
+	secondLine.clear();
+    getline(infile,secondLine);
+	secondLine.erase(remove(secondLine.begin(), secondLine.end(), '\n'), secondLine.end());
+	secondLine.erase(remove(secondLine.begin(), secondLine.end(), ' '), secondLine.end());
+
+	stringstream ss(secondLine);
+	string token;
+	while (getline(ss,token, ','))
 	{
-		string ht;
-		infile>>ht;
-		transform(ht.begin(), ht.end(),ht.begin(), ::toupper);
-		hintList.push_back(ht);	
+		//token.erase(token.begin() , token.begin()+1);
+		cout<<token<<endl; 
+		transform(token.begin(), token.end(),token.begin(), ::toupper);
+		hintList.push_back(token);
 	}
-	//infile>>col;
+	hintList[hintList.size() -1 ].pop_back();
+	noOfhints = hintList.size();
+	// for (int i = 0; i < noOfhints; i++)
+	// {
+	// 	string ht;
+	// 	infile>>ht;
+	// 	transform(ht.begin(), ht.end(),ht.begin(), ::toupper);
+	// 	hintList.push_back(ht);	
+	// }
+	
 	outfile<<"Starting decryption of cipher text----------\n\n"<<ciphertext<<endl;
 	outfile<<"\nHints : \n";
 	for (int i = 0; i < hintList.size(); i++)
-		outfile<<hintList[i]<<endl;
+		outfile<<"|"<<hintList[i]<<"|"<<endl;
 
 	col_Combinations = findColNumber(ciphertext.length());
+	
 	bool flag = true;
 	for (int lt = 0; lt < col_Combinations.size(); lt++)
 	{
@@ -128,11 +124,17 @@ int main() {
 			outfile<<endl;
 		}
 		
-		vi a;
+		int a[col];
 		for (int i = 0; i < col; i++)
-			a.push_back(i);
+			a[i] = i;
 		
-		permute(a, col, 0);
+		
+		do {
+			vi item(a , a+col); 
+			allComb.push_back(item);
+			noOfcomb++;
+		} while (next_permutation(a, a + col)); 
+
 		int max  = 0,i = 0;
 		for (i = 0; i < allComb.size(); i++)
 		{
@@ -202,18 +204,19 @@ int main() {
 		if( k >= plaintext.length())
 			break;
 	}
+	outfile<<"Encrypting :\n\n";
 	for (int i = 0; i < col; i++)
 	{
 		for (int j = 0; j < colMatrix[i].size(); j++)
-			cout<<colMatrix[i][j];
-		cout<<endl;
+			outfile<<colMatrix[i][j];
+		outfile<<endl;
 	}
 	
 	for (int j = 0; j < key.size(); j++)
 	{
 		tmpMatrix[key[j]] = colMatrix[j];
 	}
-	cout<<"\n------------------------------------\n";
+	cout<<"\n-------------------------------\nRearranging according to key:\n\n";
 	string new_str;
 	for (int i = 0; i < col; i++)
 	{
