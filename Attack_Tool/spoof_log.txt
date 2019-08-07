@@ -1,0 +1,31 @@
+Listening on:
+wlp6s0 -> FC:F8:AE:42:85:BF
+  192.168.0.103/255.255.255.0
+  fe80::4ca1:16f0:7745:4dec/64
+
+SSL dissection needs a valid 'redir_command_on' script in the etter.conf file
+Ettercap might not work correctly. /proc/sys/net/ipv6/conf/all/use_tempaddr is not set to 0.
+Ettercap might not work correctly. /proc/sys/net/ipv6/conf/wlp6s0/use_tempaddr is not set to 0.
+Privileges dropped to EUID 65534 EGID 65534...
+
+  33 plugins
+  42 protocol dissectors
+  57 ports monitored
+20388 mac vendor fingerprint
+1766 tcp OS fingerprint
+2182 known services
+Lua: no scripts were specified, not starting up!
+Starting Unified sniffing...
+
+DHCP spoofing: using specified ip_pool, netmask 255.255.255.0, dns 8.8.8.8
+DHCP: [192.168.0.1] OFFER : 192.168.0.102 255.255.255.0 GW 192.168.0.1 DNS 192.168.0.1 
+DHCP: [EC:9B:F3:9C:9D:95] REQUEST 192.168.0.102
+DHCP spoofing: fake ACK [EC:9B:F3:9C:9D:95] assigned to 192.168.0.102 
+DHCP: [192.168.0.1] ACK : 192.168.0.102 255.255.255.0 GW 192.168.0.1 DNS 192.168.0.1 
+DHCP: [192.168.0.1] OFFER : 192.168.0.102 255.255.255.0 GW 192.168.0.1 DNS 192.168.0.1 
+DHCP: [EC:9B:F3:9C:9D:95] DISCOVER 
+DHCP spoofing: fake OFFER [EC:9B:F3:9C:9D:95] offering 192.168.0.100 
+DHCP: [192.168.0.103] OFFER : 192.168.0.100 255.255.255.0 GW 192.168.0.103 DNS 8.8.8.8 
+DHCP: [EC:9B:F3:9C:9D:95] REQUEST 192.168.0.100
+DHCP spoofing: fake ACK [EC:9B:F3:9C:9D:95] assigned to 192.168.0.100 
+DHCP: [192.168.0.103] ACK : 192.168.0.100 255.255.255.0 GW 192.168.0.103 DNS 8.8.8.8 
