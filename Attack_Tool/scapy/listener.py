@@ -43,11 +43,11 @@ def get_option(dhcp_options, key):
 
 def dhcp_offer(raw_mac, xid):
     packet = (Ether(src=get_if_hwaddr('wlp6s0'), dst='ff:ff:ff:ff:ff:ff') /
-              IP(src="192.168.0.105", dst='192.168.0.255') /
+              IP(src="192.168.1.111", dst='192.168.1.255') /
               UDP(sport=67, dport=68) /
-              BOOTP(op='BOOTREPLY', chaddr=raw_mac, yiaddr='192.168.2.4', siaddr='192.168.0.105', xid=xid) /
+              BOOTP(op='BOOTREPLY', chaddr=raw_mac, yiaddr='192.168.2.4', siaddr='192.168.1.111', xid=xid) /
               DHCP(options=[("message-type", "offer"),
-                            ('server_id', '192.168.0.105'),
+                            ('server_id', '192.168.1.111'),
                             ('subnet_mask', '255.255.255.0'),
                             ('router', '192.168.2.5'),
                             ('lease_time', 172800),
@@ -60,11 +60,11 @@ def dhcp_offer(raw_mac, xid):
 
 def dhcp_ack(raw_mac, xid, command):
     packet = (Ether(src=get_if_hwaddr('wlp6s0'), dst='ff:ff:ff:ff:ff:ff') /
-              IP(src="192.168.0.105", dst='192.168.0.255') /
+              IP(src="192.168.1.111", dst='192.168.1.255') /
               UDP(sport=67, dport=68) /
-              BOOTP(op='BOOTREPLY', chaddr=raw_mac, yiaddr='192.168.2.4', siaddr='192.168.0.105', xid=xid) /
+              BOOTP(op='BOOTREPLY', chaddr=raw_mac, yiaddr='192.168.2.4', siaddr='192.168.1.111', xid=xid) /
               DHCP(options=[("message-type", "ack"),
-                            ('server_id', '192.168.0.105'),
+                            ('server_id', '192.168.1.111'),
                             ('subnet_mask', '255.255.255.0'),
                             ('router', '192.168.2.5'),
                             ('lease_time', 172800),
