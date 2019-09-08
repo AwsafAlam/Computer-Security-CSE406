@@ -1,0 +1,156 @@
+# yersinia v0.8.2 started in awsaf-Inspiron-5437 on Sat Sep  7 16:35:10 2019
+
+Network Interface wlp6s0
+
+ wlp6s0 iflinkname EN10MB
+ wlp6s0 iflinkdesc Ethernet
+ wlp6s0 MAC = fcf8.ae42.85bf
+Network Interface lo
+
+ lo iflinkname EN10MB
+ lo iflinkdesc Ethernet
+ lo MAC = 0000.0000.0000
+Network Interface enp7s0
+
+ enp7s0 iflinkname EN10MB
+ enp7s0 iflinkdesc Ethernet
+ enp7s0 MAC = e0db.55bf.4f89
+Network Interface virbr0
+
+ virbr0 iflinkname EN10MB
+ virbr0 iflinkdesc Ethernet
+ virbr0 MAC = 5254.005c.8820
+Network Interface bluetooth0
+Network Interface nflog
+Network Interface nfqueue
+Network Interface usbmon1
+pcap_open_live failed: usbmon1: Can't open USB bus file /sys/kernel/debug/usbmon/1t: No such file or directory
+
+ th_uptime thread = 28353700
+
+ ncurses_gui_th = 666183424
+ Notification: Warning: interface wlp6s0 selected as the default one
+interfaces_th_pcap_listen pcap_next_ex failed: (-1) The interface went down
+ ints_pcap_listen_exit started...
+
+ ints_pcap_listen_exit finished...
+ attack_launch: 27B52700 Attack thread 26F39700 is born!!
+
+ ncurses_gui_th_exit start...
+
+ thread_destroy 27B52700 destroying 26F39700...
+ attack_th_exit -> attack_th.stop=1   attack_th.id=26F39700....
+ attack_th_exit: 26F39700 finished
+ thread_destroy 27B52700 after PTHREAD_JOIN 26F39700...
+ ncurses_gui_th_exit finish...
+ g00dbye function called from 30FC2A00
+
+ ints_destroy started...
+ ints_destroy finished...
+ Showing MOTD..
+# yersinia finished on Sat Sep  7 16:41:28 2019
+
+# yersinia v0.8.2 started in awsaf-Inspiron-5437 on Sat Sep  7 16:42:12 2019
+
+Network Interface wlp6s0
+
+ wlp6s0 iflinkname EN10MB
+ wlp6s0 iflinkdesc Ethernet
+ wlp6s0 MAC = fcf8.ae42.85bf
+Network Interface lo
+
+ lo iflinkname EN10MB
+ lo iflinkdesc Ethernet
+ lo MAC = 0000.0000.0000
+Network Interface enp7s0
+
+ enp7s0 iflinkname EN10MB
+ enp7s0 iflinkdesc Ethernet
+ enp7s0 MAC = e0db.55bf.4f89
+Network Interface virbr0
+
+ virbr0 iflinkname EN10MB
+ virbr0 iflinkdesc Ethernet
+ virbr0 MAC = 5254.005c.8820
+Network Interface bluetooth0
+Network Interface nflog
+Network Interface nfqueue
+Network Interface usbmon1
+pcap_open_live failed: usbmon1: Can't open USB bus file /sys/kernel/debug/usbmon/1t: No such file or directory
+
+ th_uptime thread = 37C5E700
+
+ ncurses_gui_th = 927323904
+ Notification: Warning: interface wlp6s0 selected as the default one
+
+ ncurses_gui_th_exit start...
+ ncurses_gui_th_exit finish...
+ g00dbye function called from 408CDA00
+
+ ints_destroy started...
+ ints_destroy killing pcap_listener(944109312)...
+
+ thread_destroy 408CDA00 destroying 3845F700...
+ thread_destroy 408CDA00 after PTHREAD_JOIN 3845F700...
+ ints_destroy finished...
+ Showing MOTD..
+# yersinia finished on Sat Sep  7 16:42:17 2019
+
+# yersinia v0.8.2 started in awsaf-Inspiron-5437 on Sat Sep  7 16:42:19 2019
+
+Network Interface wlp6s0
+
+ wlp6s0 iflinkname EN10MB
+ wlp6s0 iflinkdesc Ethernet
+ wlp6s0 MAC = fcf8.ae42.85bf
+Network Interface lo
+
+ lo iflinkname EN10MB
+ lo iflinkdesc Ethernet
+ lo MAC = 0000.0000.0000
+Network Interface enp7s0
+
+ enp7s0 iflinkname EN10MB
+ enp7s0 iflinkdesc Ethernet
+ enp7s0 MAC = e0db.55bf.4f89
+Network Interface virbr0
+
+ virbr0 iflinkname EN10MB
+ virbr0 iflinkdesc Ethernet
+ virbr0 MAC = 5254.005c.8820
+Network Interface bluetooth0
+Network Interface nflog
+Network Interface nfqueue
+Network Interface usbmon1
+pcap_open_live failed: usbmon1: Can't open USB bus file /sys/kernel/debug/usbmon/1t: No such file or directory
+
+ th_uptime thread = 5DD12700
+
+ ncurses_gui_th = 1565595392
+ Notification: Warning: interface wlp6s0 selected as the default one
+ attack_launch: 5D511700 Attack thread 5CB10700 is born!!
+ attack_launch: 5D511700 Attack thread 57FFF700 is born!!
+
+ ncurses_gui_th_exit start...
+
+ thread_destroy 5D511700 destroying 5CB10700...
+ attack_th_exit -> attack_th.stop=1   attack_th.id=5CB10700....
+ attack_th_exit: 5CB10700 finished
+ thread_destroy 5D511700 after PTHREAD_JOIN 5CB10700...
+
+ thread_destroy 5D511700 destroying 57FFF700...
+ attack_th_exit -> attack_th.stop=1   attack_th.id=57FFF700....
+ attack_th_exit: 57FFF700 finished
+ thread_destroy 5D511700 after PTHREAD_JOIN 57FFF700...
+ ncurses_gui_th_exit finish...
+ g00dbye function called from 66981A00
+
+ ints_destroy started...
+ ints_destroy killing pcap_listener(1582380800)...
+
+ thread_destroy 66981A00 destroying 5E513700...
+ thread_destroy 66981A00 after PTHREAD_JOIN 5E513700...
+ ints_destroy finished...
+ Showing MOTD..
+# yersinia finished on Sat Sep  7 16:45:56 2019
+
